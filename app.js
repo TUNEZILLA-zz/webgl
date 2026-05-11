@@ -7,6 +7,7 @@ const ui = {
   playPauseButton: requireElement("#playPauseButton"),
   resetButton: requireElement("#resetButton"),
   screenshotButton: requireElement("#screenshotButton"),
+  compactButton: requireElement("#compactButton"),
   collapseButton: requireElement("#collapseButton"),
   controlPanel: requireElement("#controlPanel"),
   presetSelect: requireElement("#presetSelect"),
@@ -1234,6 +1235,7 @@ class VisualizerApp {
       this.renderer.reset();
     });
     this.elements.screenshotButton.addEventListener("click", () => this.saveScreenshot());
+    this.elements.compactButton.addEventListener("click", () => this.toggleCompactUi());
     this.elements.collapseButton.addEventListener("click", () => this.toggleControls());
     this.elements.presetSelect.addEventListener("change", () => {
       const preset = PRESETS.find((item) => item.name === this.elements.presetSelect.value) || PRESETS[0];
@@ -1267,6 +1269,12 @@ class VisualizerApp {
     const isCollapsed = this.elements.controlPanel.classList.toggle("is-collapsed");
     this.elements.collapseButton.textContent = isCollapsed ? "Show controls" : "Minimize controls";
     this.elements.collapseButton.setAttribute("aria-expanded", String(!isCollapsed));
+  }
+
+  toggleCompactUi() {
+    const isCompact = document.body.classList.toggle("compact-ui");
+    this.elements.compactButton.textContent = isCompact ? "Show UI" : "Compact UI";
+    this.elements.compactButton.setAttribute("aria-pressed", String(isCompact));
   }
 
   applyPreset(preset) {
