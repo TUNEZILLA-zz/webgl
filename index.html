@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WebGL Audio Visualizer</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <canvas id="visualizer" aria-label="Audio-reactive WebGL deep space visualizer"></canvas>
+    <div id="textOverlay" class="text-overlay" aria-hidden="true">RAW WEBGL</div>
+
+    <main class="shell">
+      <section class="hero panel">
+        <p class="eyebrow">Rawtunez RawWebGL</p>
+        <h1>Audio-reactive album-art instrument.</h1>
+        <p>
+          Fly through tunnel presets, nebula glitches, star streaks, and pulsing
+          logo layers driven by bass, mids, highs, and volume.
+        </p>
+      </section>
+
+      <section id="controlPanel" class="controls panel" aria-label="Audio visualizer controls">
+        <div class="top-row">
+          <div class="readout">
+            <span>Mode</span>
+            <strong id="modeLabel">Idle</strong>
+          </div>
+          <div class="top-actions">
+            <button id="screenshotButton" type="button" class="ghost-button">Save PNG</button>
+            <button id="collapseButton" type="button" class="ghost-button" aria-expanded="true" aria-controls="controlPanel">
+              Minimize controls
+            </button>
+          </div>
+        </div>
+
+        <div class="button-grid">
+          <button id="micButton" type="button">Start microphone</button>
+          <label class="button file-button">
+            Upload audio
+            <input id="fileInput" type="file" accept="audio/*" />
+          </label>
+          <button id="playPauseButton" type="button" disabled>Play file</button>
+          <button id="resetButton" type="button">Reset visualizer</button>
+        </div>
+
+        <label class="field">
+          <span>Preset</span>
+          <select id="presetSelect">
+            <option>Space Tunnel</option>
+            <option>Dark Arcade</option>
+            <option>Glitch Nebula</option>
+            <option>Sun Disk</option>
+            <option>Murder Land</option>
+            <option>Casino Ice</option>
+            <option>TuneZilla Green</option>
+            <option>Chromatic Clock</option>
+            <option>4TEX777</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Intensity</span>
+          <select id="intensitySelect">
+            <option>Chill</option>
+            <option selected>Normal</option>
+            <option>Chaos</option>
+            <option>Performance</option>
+          </select>
+        </label>
+
+        <div class="text-controls">
+          <label class="toggle">
+            <input id="textToggle" type="checkbox" checked />
+            <span>Show text layer</span>
+          </label>
+          <label class="field">
+            <span>Custom text</span>
+            <input id="textInput" type="text" value="RAW WEBGL" maxlength="28" list="textPresets" />
+            <datalist id="textPresets">
+              <option value="RAW WEBGL"></option>
+              <option value="RAWTUNEZ"></option>
+              <option value="4TEX777"></option>
+              <option value="MURDER LAND"></option>
+              <option value="DARKADE"></option>
+              <option value="TUNEZILLA"></option>
+              <option value="CHROMATIC CLOCK"></option>
+            </datalist>
+          </label>
+        </div>
+
+        <div class="sliders">
+          <label>
+            <span>Sensitivity</span>
+            <input id="gainSlider" type="range" min="0.55" max="3.5" step="0.05" value="1.45" />
+          </label>
+          <label>
+            <span>Star speed</span>
+            <input id="speedSlider" type="range" min="0.25" max="3" step="0.05" value="1.2" />
+          </label>
+          <label>
+            <span>Glow intensity</span>
+            <input id="glowSlider" type="range" min="0.35" max="2.5" step="0.05" value="1.25" />
+          </label>
+          <label>
+            <span>Particle amount</span>
+            <input id="particleSlider" type="range" min="0.25" max="1" step="0.05" value="0.85" />
+          </label>
+          <label>
+            <span>Warp intensity</span>
+            <input id="warpSlider" type="range" min="0" max="2.5" step="0.05" value="1.1" />
+          </label>
+        </div>
+
+        <div class="meters" aria-label="Audio meters">
+          <div class="meter"><span>Bass</span><i id="bassMeter"></i></div>
+          <div class="meter"><span>Mids</span><i id="midMeter"></i></div>
+          <div class="meter"><span>Highs</span><i id="highMeter"></i></div>
+          <div class="meter"><span>Volume</span><i id="volumeMeter"></i></div>
+        </div>
+
+        <p id="status" class="status" role="status">Choose microphone or upload audio to begin.</p>
+        <audio id="audio" preload="metadata"></audio>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
